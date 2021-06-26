@@ -1,0 +1,55 @@
+---
+- name: Potim vyhadaiu
+  hosts: localhost
+  become: true
+
+  tasks:
+  - name: install nginx
+    apt:
+      name: nginx
+      state: latest
+
+  - name: start nginx
+    service:
+      name: nginx
+      state: started
+
+  - name: update all
+    apt:
+      name: "*"
+      state: latest
+
+  - name: cleaning
+    apt:
+      autoclean: yes
+  
+  - name: create a directory
+    ansible.builtin.file:
+      path: /etc/KiSH
+      state: directory
+      mode: '0755'
+
+  - name: create file
+    copy:
+      dest: "/etc/KiSH/kkolduna.txt"
+      content: |
+        ty uvidish kak bessonnica v chas nochnoi
+        meniaet neludimaya oblick tvoi
+
+  - name: download file
+    get_url:
+      url: https://mp3minusovki.com/images/albums/main/265886389710d754b0790a2faebc6073.jpg
+      dest: /etc/KiSH/65886389710d754b0790a2faebc6073.jpg
+
+  - name: remove file
+    ansible.builtin.file:
+      path: /etc/KiSH/65886389710d754b0790a2faebc6073.jpg
+      state: absent
+
+  - name: remove KiSH (directory)
+    ansible.builtin.file:
+      path: /etc/KiSH
+      state: absent
+
+  - name: da budet ping!!!
+    ping:  

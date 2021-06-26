@@ -1,0 +1,20 @@
+192.168.0.1
+
+[localhost]
+127.0.0.1
+
+[dbase1]
+abra.com
+234.54.9.5
+
+[dbase2]
+kadabra.com
+234.54.9.7
+
+[db:children]
+dbase1
+dbase2
+
+[dev_db]
+beauty ansible_host=234.54.9.5
+monster ansible_host=234.54.9.7
